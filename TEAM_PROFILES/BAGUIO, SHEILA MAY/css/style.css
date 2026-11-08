@@ -1,0 +1,151 @@
+body {
+    font-family: cursive;
+    background-color: #D1E9F6;
+    text-align: center;
+    margin-top: 20px;
+    background-image: url(https://i.pinimg.com/736x/ef/07/79/ef0779698ca63f40b09e0cde53cd0f24.jpg);
+    font-weight: lighter;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+h3 {
+    border: 2px solid #EECAD5;
+    padding: 10px;
+    background-color: #FDF4F5;
+    border-radius: 10px;
+}
+
+.center-img {
+    text-align: center;
+    margin: 0 auto;
+    width: 150px; /* Adjust as needed */
+    height: 150px; /* Ensure image dimensions match */
+    overflow: hidden;
+    border-radius: 50%;
+    border: 5px solid #EECAD5;
+}
+
+.container, form {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+    background-color: #FFF;
+    border: 2px solid #EECAD5;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container ul, .container ol {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.favorites img {
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.center-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fits within the circle */
+
+}
+
+.container p {
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+}
+
+.container form {
+    text-align: center;
+}
+
+li {
+    list-style-position: inside;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #EECAD5;
+    padding: 8px;
+    text-align: center;
+}
+
+iframe {
+    width: 700px;
+    height: 400px;
+}
+
+
+/* iPhone 12 Pro Styles */
+@media only screen and (max-width: 390px) {
+    .profile-container, header {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    iframe {
+        width: 320px;
+        height: 220px;
+    }
+
+    nav ul, ol {
+        flex-direction: center;
+        text-align: center;
+    }
+
+    .profile-picture {
+        width: 90px;
+        height: 90px;
+    }
+
+    audio {
+        width: 100%;
+    }
+    footer {
+        width: auto;
+    }
+    .Home {
+        width: auto;
+    }
+}
+
+/* iPad Mini Styles */
+@media only screen and (max-width: 768px) {
+    .profile-container, header {
+        width: 90%;
+        margin: 15px auto;
+    }
+
+    iframe {
+        width: 600px;
+        height: 360px;
+    }
+
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+
+    audio {
+        width: 90%;
+    }
+    footer {
+        width: auto;
+    }
+    .Home {
+        width: auto;
+    }
+}
+

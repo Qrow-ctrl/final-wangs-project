@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheese TteokBokki | Wangs</title>
+    <link rel="stylesheet" href="../CSS/clickableItems.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+</head>
+<body onload="updateCartCount(); loadCart();">
+    <a id="prevProduct" class="side-arrow left" href="#" title="Previous product">&#10094;</a>
+    <a id="nextProduct" class="side-arrow right" href="#" title="Next product">&#10095;</a>
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="../index.html" class="active">Home</a></li>
+                    <li><a href="../HTML/products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="../HTML/team.html">Team</a>
+                            <a href="../HTML/store_policy.html">Store Policy</a>
+                            <a href="../HTML/contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="../HTML/signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="../HTML/cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="product-page">
+        <div class="image-container">
+            <!-- Main Image -->
+            <img id="main-image" src="../IMAGES/drive img/Cheese-Tteokbokki.png" alt="Cheese TteokBokki">
+            <!-- Thumbnails -->
+            <div class="thumbnails">
+                <img src="../IMAGES/drive img/Cheese-Tteokbokki.png" alt="Thumbnail 1" onclick="changeImage('../IMAGES/drive img/Cheese-Tteokbokki.png')">
+                <img src="../IMAGES/drive img/Cheese-Tteokbokki.jpg" alt="Thumbnail 2" onclick="changeImage('../IMAGES/drive img/Cheese-Tteokbokki.jpg')">
+            </div>
+        </div>
+        <div class="details-container">
+            <h1 class="product-title">Cheese TteokBokki</h1>
+            <p class="product-description">Take traditional Tteokbokki to the next level with a generous topping of gooey melted cheese. The creaminess of the cheese balances the spiciness of the sauce, creating a perfect harmony of flavors.</p>
+            <div class="summary-item">
+                <label for="price" class="label">Price:</label>
+                <div class="price">₱190.00</div>
+            </div>
+            <div class="summary-item quantity-section">
+                <label for="quantity" class="label">Quantity:</label>
+                <div class="value">
+                    <button onclick="changeQuantity(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly>
+                    <button onclick="changeQuantity(1)">+</button>
+                </div>
+            </div>
+
+            <div class="summary-divider"></div>
+            <div class="action-buttons">
+                <button class="add-to-cart" onclick="handleAddToCart()">Add to Cart</button>
+                <button class="buy-now" onclick="handleBuyNow()">Buy Now</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <br>
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to handle quantity changes
+        function changeQuantity(amount) {
+            const quantityInput = document.getElementById('quantity');
+            let currentQuantity = parseInt(quantityInput.value, 10);
+    
+            if (amount === -1 && currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            } else if (amount === 1) {
+                quantityInput.value = currentQuantity + 1;
+            }
+        }
+    
+        // Function to add product to cart
+        function handleAddToCart() {
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const price = 190; // Fixed price for Cheese Tteokbokki
+    
+            const product = {
+                name: 'Cheese Tteokbokki',
+                price: price,
+                quantity: quantity,
+                image: '../IMAGES/drive img/Cheese-Tteokbokki.png' // Use the primary image
+            };
+    
+            addToCart(product);
+            updateCartCount();
+            alert(`${product.name} has been added to your cart!`);
+        }
+    
+        // Function to add item to the cart (localStorage)
+        function addToCart(product) {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingProductIndex = cart.findIndex(item => item.name === product.name);
+    
+                if (existingProductIndex !== -1) {
+                    // If product already exists, update the quantity
+                    cart[existingProductIndex].quantity += product.quantity;
+                } else {
+                    // Add new product to the cart
+                    cart.push(product);
+                }
+    
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
+        }
+    
+        // Function to update cart count in the header
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems || 0; // Default to 0 if cart is empty
+        }
+    
+        // Function to load cart items and display them in 'your-cart' container
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const reviewPaymentButton = document.getElementById('review-payment');
+    
+            if (cart.length > 0) {
+                emptyCartMessage.style.display = 'none';
+                reviewPaymentButton.disabled = false;
+                cartItemsContainer.innerHTML = cart.map(product => `
+                    <div class="cart-item">
+                        <img src="${product.image}" alt="${product.name}" class="cart-item-image" />
+                        <div class="cart-item-details">
+                            <h4>${product.name}</h4>
+                            <p>Quantity: ${product.quantity}</p>
+                            <span>₱${(product.price * product.quantity).toFixed(2)}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                emptyCartMessage.style.display = 'block';
+                reviewPaymentButton.disabled = true;
+                cartItemsContainer.innerHTML = '';
+            }
+        }
+
+        // Function to change the main image when a thumbnail is clicked
+        function changeImage(src) {
+            document.getElementById('main-image').src = src;
+        }
+    
+        // Ensure the cart count is updated on page load
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+    
+    <script src="../JAVA/script.js"></script>
+</body>
+</html>

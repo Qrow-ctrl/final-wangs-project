@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <section>
+        <div class="container form">
+            <h3>Register</h3>
+            <div class="form-container">
+                <form id="registrationForm">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" required><br>
+        
+                    <label for="middleName">Middle Name:</label>
+                    <input type="text" id="middleName"><br>
+        
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" required><br>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" required><br>
+
+                    <label for="number">Number:</label>
+                    <input type="text" id="number" required><br>
+
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" required><br>
+        
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" required><br>
+        
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select><br>
+        
+                    <label for="aboutMe">About Me:</label>
+                    <textarea id="aboutMe"></textarea><br>
+            
+                    <label for="profileImage">Profile Image:</label>
+                    <input type="file" id="profileImage" accept="image/*" required><br>
+        
+                    <button type="submit" class="nav-button">Submit</button>
+                </form>
+            </div>
+            <div class="success-message" id="successMessage">Registered successfully!</div>
+        </div>
+
+    <a href="profile.html">Back to Personal Information</a>
+    
+    </section>
+
+    <script>
+        document.getElementById('registrationForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Get values from the form
+            var firstName = document.getElementById('firstName').value;
+            var middleName = document.getElementById('middleName').value;
+            var lastName = document.getElementById('lastName').value;
+            var address = document.getElementById('address').value;
+            var number = document.getElementById('number').value;
+            var email = document.getElementById('email').value;
+            var dob = document.getElementById('dob').value;
+            var gender = document.getElementById('gender').value;
+            var aboutMe = document.getElementById('aboutMe').value;
+            var profileImage = document.getElementById('profileImage').files[0];
+
+            console.log("Form data: ", { firstName, middleName, lastName, address, number, email, dob, gender, aboutMe });
+
+            // Convert the image file to a base64 string
+            var reader = new FileReader();
+            reader.readAsDataURL(profileImage);
+            reader.onloadend = function() {
+                // Save the data to localStorage
+                localStorage.setItem("firstName", firstName);
+                localStorage.setItem("middleName", middleName);
+                localStorage.setItem("lastName", lastName);
+                localStorage.setItem("address", address);
+                localStorage.setItem("number", number);
+                localStorage.setItem("email", email);
+                localStorage.setItem("dob", dob);
+                localStorage.setItem("gender", gender);
+                localStorage.setItem("aboutMe", aboutMe);
+                localStorage.setItem("profileImage", reader.result); // Save base64 image
+                
+                // Show success message
+                var successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block'; // Display the message
+                
+                // Redirect to profile page after a short delay
+                setTimeout(function() {
+                    window.location.href = 'profile.html'; // Redirect to correct profile page
+                }, 2000); // Delay for 2 seconds
+            };
+        };
+    </script>
+</body>
+</html>
