@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+</head>
+
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="logo-tagline">
+                    <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                    <span class="tagline">WANGS</span>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <div class="dropdown">
+                            <button class="dropbtn">About Us</button>
+                            <div class="dropdown-content">
+                                <a href="team.html">Team</a>
+                                <a href="store_policy.html">Store Policy</a>
+                                <a href="contact.html">Contact Us</a>
+                            </div>
+                        </div>
+                        <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                        <li>
+                            <a href="cart.html">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count" class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+    <!-- Centered Container -->
+    <div class="create-account-container">
+        <div class="create-account-form-container">
+            <h2>Create a New Account</h2>
+            <form id="createAccountForm">
+                <fieldset>
+                    <legend>Contact Details</legend>
+                    <label for="firstName">First Name*</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <label for="lastName">Last Name*</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <label for="phone">Phone Number*</label>
+                    <input type="text" id="phone" name="phone" required>
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Address</legend>
+                    <label for="barangay">Barangay*</label>
+                    <input type="text" id="barangay" name="barangay" required>
+                    <label for="municipality">Municipality/City*</label>
+                    <input type="text" id="municipality" name="municipality" required>
+                    <label for="province">Province*</label>
+                    <select id="province" name="province" required>
+                        <option value="">Select Province</option>
+                        <option value="Metro Manila">Metro Manila</option>
+                        <option value="Cebu">Cebu</option>
+                        <option value="Davao del Sur">Davao del Sur</option>
+                        <option value="Laguna">Laguna</option>
+                        <option value="Pampanga">Pampanga</option>
+                        <option value="Bulacan">Bulacan</option>
+                        <option value="Bohol">Bohol</option>
+                        <option value="Negros Oriental">Negros Oriental</option>
+                        <option value="Negros Occidental">Negros Occidental</option>
+                        <option value="Others...">Others</option>
+                    </select>
+                    <label for="postalCode">Postal Code*</label>
+                    <input type="text" id="postalCode" name="postalCode" required pattern="[0-9]{4}" title="Please enter a 4-digit postal code.">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Account</legend>
+                    <label for="username">Username*</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password*</label>
+                    <input type="password" id="password" name="password" required>
+                    <label for="confirmPassword">Confirm Password*</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </fieldset>
+
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../JAVA/script.js"></script>
+</body>
+</html>

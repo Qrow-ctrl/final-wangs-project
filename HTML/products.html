@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+
+
+</head>
+<body onload="updateCartCount(); loadCart();">
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">Team</a>
+                            <a href="store_policy.html">Store Policy</a>
+                            <a href="contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button id="addProductButton" class="add-product-btn">ADD PRODUCT</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Add Product Modal -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2>Add a Product</h2>
+        <form id="productForm">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" placeholder="Enter product name" required>
+            
+            <label for="productDescription">Product Description:</label>
+            <input type="text" id="productDescription" placeholder="Enter product description" required>
+            
+            <label for="productPrice">Product Price:</label>
+            <input type="number" id="productPrice" placeholder="Enter product price" required>
+            
+            <label for="productImage">Product Image:</label>
+            <input type="file" id="productImage" accept="image/*" required>
+            <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto; margin-top: 10px;">
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+</div>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <h2>Products</h2>
+        <div id="productsContainer" class="products-container">
+            <!-- Existing or dynamically added products will be displayed here -->
+        </div>
+    </section>
+
+<br>
+
+<main>
+        <div class="content-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>All Items</h3>
+                <ul class="shop-categories">
+                    <li>
+                        <strong>
+                            SHOP
+                            <button class="toggle-button" data-target="shop-content">+</button>
+                        </strong>
+                        <ul id="shop-content" class="sub-categories" style="display: none;">
+                            <li><a href="products.html">All</a></li>
+                            <li><a href="noodles.html">Noodles</a></li>
+                            <li><a href="kimbap.html">Kimbap</a></li>
+                            <li><a href="appetizer.html">Appetizer</a></li>
+                            <li><a href="rice.html">Rice</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>
+                            FLAVOR
+                            <button class="toggle-button" data-target="flavor-content">+</button>
+                        </strong>
+                        <ul id="flavor-content" class="sub-categories" style="display: none;">
+                            <li><a href="spicy.html">Spicy</a></li>
+                            <li><a href="cheese.html">Cheese</a></li>
+                            <li><a href="egg.html">Egg</a></li>
+                            <li><a href="kimchi.html">Kimchi</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <h4>
+                            Price
+                            <button class="toggle-button" data-target="price-content">+</button>
+                        </h4>
+                        <div class="filter-content" id="price-content" style="display: none;">
+                            <input type="range" id="price-range" min="10" max="200" step="10" value="100" onchange="filterProductsByPrice()">
+                            <div class="price-values">
+                                <span>₱10.00</span>
+                                <span>₱200.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        <div class="productName-container">
+            <h2>ALL ITEMS</h2>
+
+        </div>
+            <!-- Product Section -->
+            <section class="product-section">
+                <div class="sort-options">
+                    <label for="sort">Sort By:</label>
+                    <select id="sort">
+                        <option value="low-to-high">Prices: Low to High</option>
+                        <option value="high-to-low">Prices: High to Low</option>
+                    </select>
+                </div>
+                <div class="product-grid">
+                    <div class="product" data-name="SHIN Ramyun" data-description="Iconic Korean spicy ramen." data-price="130.00" data-image="../IMAGES/drive img/Shin-Ramyun.png">
+                        <a href="../clickableItems/shin-ramyun.html">
+                            <img src="../IMAGES/drive img/Shin-Ramyun.png" alt="SHIN Ramyun">
+                        </a>
+                        <h3>SHIN Ramyun</h3>
+                        <div class="star-rating">★★★★☆</div>
+                        <p>Iconic Korean spicy ramen.</p><br>
+                        <p>₱130.00</p>
+                    </div>  
+
+<div class="product" data-name="JIN Ramen (Mild)" data-description="Balanced flavors with a gentle kick." data-price="130.00" data-image="../IMAGES/drive img/Jin-Ramen-Mild.png">
+    <a href="../clickableItems/Jin-Ramen-Mild.html">
+    <img src="../IMAGES/drive img/Jin-Ramen-Mild.png" alt="JIN Ramen (Mild)">
+    </a>
+    <h3>JIN Ramen (Mild)</h3>
+    <div class="star-rating">★★★☆☆</div>
+    <p>Balanced flavors with a gentle kick.</p><br>
+    <p>₱130.00</p>
+</div>
+
+<div class="product" data-name="JIN Ramen (Spicy)" data-description="For spice lovers craving bold heat." data-price="130.00" data-image="../IMAGES/drive img/Jin-Ramen-spicy (1).png">
+    <a href="../clickableItems/Jin-Ramen-spicy.html">
+    <img src="../IMAGES/drive img/Jin-Ramen-spicy (1).png" alt="JIN Ramen (Spicy)">
+    </a>
+    <h3>JIN Ramen (Spicy)</h3>
+    <div class="star-rating">★★★★★</div>
+    <p>For spice lovers craving bold heat.</p><br>
+    <p>₱130.00</p>
+</div>
+
+<div class="product" data-name="Cheese Ramen" data-description="Creamy, cheesy goodness with a ramen twist." data-price="130.00" data-image="../IMAGES/drive img/Cheese-Ramen.png">
+    <a href="../clickableItems/Cheese-Ramen.html">
+    <img src="../IMAGES/drive img/Cheese-Ramen.png" alt="Cheese Ramen">
+    </a>
+    <h3>Cheese Ramen</h3>
+    <div class="star-rating">★★★★☆</div>
+    <p>Creamy, cheesy goodness with a ramen twist.</p><br>
+    <p>₱130.00</p>
+</div>
+
+<div class="product" data-name="Kimchi Ramen" data-description="A tangy, spicy bowl infused with kimchi flavors." data-price="130.00" data-image="../IMAGES/drive img/Kimchi-Ramen.png">
+    <a href="../clickableItems/Kimchi-Ramen.html">
+    <img src="../IMAGES/drive img/Kimchi-Ramen.png" alt="Kimchi Ramen">
+    </a>
+    <h3>Kimchi Ramen</h3>
+    <div class="star-rating">★★★☆☆</div>
+    <p>A tangy, spicy bowl infused with kimchi flavors.</p><br>
+    <p>₱130.00</p>
+</div>
+
+<!-- APPETIZERS -->
+<div class="product" data-name="Tteokbokki" data-description="Chewy rice cakes in a sweet and spicy sauce." data-price="160.00" data-image="../IMAGES/drive img/TteokBokki.png">
+    <a href="../clickableItems/TteokBokki.html">
+    <img src="../IMAGES/drive img/TteokBokki.png" alt="Tteokbokki">
+    </a>
+    <h3>Tteokbokki</h3>
+    <div class="star-rating">★★★★★</div>
+    <p>Chewy rice cakes in a sweet and spicy sauce.</p><br>
+    <p>₱160.00</p>
+</div>
+
+<div class="product" data-name="Cheese Tteokbokki" data-description="A creamy, cheesy upgrade to the classic dish." data-price="190.00" data-image="../IMAGES/drive img/Cheese-Tteokbokki.png">
+    <a href="../clickableItems/Cheese-TteokBokki.html">
+    <img src="../IMAGES/drive img/Cheese-Tteokbokki.png" alt="Cheese Tteokbokki">
+    </a>
+    <h3>Cheese Tteokbokki</h3>
+    <div class="star-rating">★★★★☆</div>
+    <p>A creamy, cheesy upgrade to the classic dish.</p><br>
+    <p>₱190.00</p>
+</div>
+
+<!-- KIMBAP -->
+<div class="product" data-name="Regular Kimbap" data-description="Classic and simple." data-price="140.00" data-image="../IMAGES/drive img/Regular-Kimbap.png">
+    <a href="../clickableItems/Regular-Kimbap.html">
+    <img src="../IMAGES/drive img/Regular-Kimbap.png" alt="Regular Kimbap">
+    </a>
+    <h3>Regular <br> Kimbap</h3>
+    <div class="star-rating">★★★☆☆</div>
+    <p>Classic and simple.</p><br>
+    <br>
+    <br>
+    <p>₱140.00</p>
+    <button class="add-to-cart">Ad to Cart</button>
+</div>
+
+<div class="product" data-name="Egg Kimbap" data-description="Packed with fluffy egg." data-price="145.00" data-image="../IMAGES/drive img/Egg kimbap.png">
+    <a href="../clickableItems/Egg-kimbap.html">
+    <img src="../IMAGES/drive img/Egg kimbap.png" alt="Egg Kimbap">
+    </a>
+    <br>
+    <br>
+    <br>
+    
+    <h3>Egg Kimbap</h3>
+    <div class="star-rating">★★★★☆</div>
+    <p>Packed with fluffy egg.</p><br>
+    
+    
+    <p>₱145.00</p>
+</div>
+
+<div class="product" data-name="Kimchi Kimbap" data-description="Tangy and savory kimchi filling." data-price="150.00" data-image="../IMAGES/drive img/kimchi-kimbap.png">
+    <a href="../clickableItems/kimchi-kimbap.html">
+    <img src="../IMAGES/drive img/kimchi-kimbap.png" alt="Kimchi Kimbap">
+    </a>
+    <h3>Kimchi Kimbap</h3>
+    <div class="star-rating">★★★★☆</div>
+    <p>Tangy and savory kimchi filling.</p><br>
+    <p>₱150.00</p>
+</div>
+
+<div class="product" data-name="Tuna Kimbap" data-description="Tasty tuna with a hint of sesame." data-price="160.00" data-image="../IMAGES/drive img/Tuna-Kimbap.png">
+    <a href="../clickableItems/Tuna-kimbap.html">
+    <img src="../IMAGES/drive img/Tuna-Kimbap.png" alt="Tuna Kimbap">
+    </a>
+    <h3>Tuna Kimbap</h3>
+    <div class="star-rating">★★★★★</div>
+    <p>Tasty tuna with a hint of sesame.</p><br>
+    <p>₱160.00</p>
+</div>
+
+<!-- RICE -->
+<div class="product" data-name="Plain Rice" data-description="Simple and versatile." data-price="15.00" data-image="../IMAGES/drive img/rice.png">
+    <a href="../clickableItems/rice.html">
+    <img src="../IMAGES/drive img/rice.png" alt="Plain Rice">
+    </a>
+    <h3>Plain Rice</h3>
+    <div class="star-rating">★★★☆☆</div>
+    <p>Simple and versatile.</p><br>
+    <br>
+    <p>₱15.00</p>
+</div>
+
+<div class="product" data-name="Kimchi Fried Rice" data-description="Spicy and flavorful, featuring stir-fried kimchi." data-price="199.00" data-image="../IMAGES/drive img/kimchi-fried-rice.png">
+    <a href="../clickableItems/kimchi-fried-rice.html">
+    <img src="../IMAGES/drive img/kimchi-fried-rice.png" alt="Kimchi Fried Rice">
+    </a>
+    <h3>Kimchi Fried Rice</h3>
+    <div class="star-rating">★★★★☆</div>
+    <p>Spicy and flavorful, featuring stir-fried kimchi.</p><br>
+    <p>₱199.00</p>
+</div>  
+                    <!-- Repeat for other products -->
+                </div>
+            </section>
+</div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2024 Wangs. All rights reserved.</p>
+</footer>
+
+<script>    
+    let products = []; // Array to store product data
+
+// Open the modal
+document.getElementById('addProductButton').addEventListener('click', () => {
+    document.getElementById('productModal').style.display = 'block';
+});
+
+// Close modal
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+// Handle file input change and preview the image
+document.getElementById('productImage').addEventListener('change', function (event) {
+    const file = event.target.files[0]; // Get the file
+    if (file) {
+        const reader = new FileReader(); // Create a new FileReader instance
+        reader.onload = function (e) {
+            const preview = document.getElementById('imagePreview');
+            preview.src = e.target.result; // Set the preview image source to the file's base64 data
+            preview.style.display = 'block'; // Show the image preview
+        };
+        reader.readAsDataURL(file); // Convert the file to a base64 data URL
+    }
+});
+
+// Handle form submission
+document.getElementById('productForm').addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent page reload
+
+    // Get product details
+    const name = document.getElementById('productName').value;
+    const description = document.getElementById('productDescription').value;
+    const price = parseFloat(document.getElementById('productPrice').value).toFixed(2);
+    const image = document.getElementById('imagePreview').src; // Get the base64 image data
+
+    if (!image || image === "#") {
+        alert("Please select an image before submitting.");
+        return; // Don't proceed if no image is selected
+    }
+
+    // Save the new product to localStorage
+    saveProductToLocalStorage(name, description, price, image);
+
+    // Add the product dynamically to the product grid
+    addProductToGrid(name, description, price, image);
+
+    // Reset form and close modal
+    event.target.reset();
+    document.getElementById('imagePreview').style.display = 'none'; // Hide the preview
+    closeModal();
+});
+
+// Save product to localStorage
+function saveProductToLocalStorage(name, description, price, image) {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const newProduct = { name, description, price, image };
+    products.push(newProduct);
+    localStorage.setItem('products', JSON.stringify(products));
+}
+
+// Function to add a product to the product grid
+function addProductToGrid(name, description, price, image) {
+    const productGrid = document.querySelector('.product-grid');
+    const productDiv = document.createElement('div');
+
+    productDiv.className = 'product';
+    productDiv.setAttribute('data-name', name);
+    productDiv.setAttribute('data-description', description);
+    productDiv.setAttribute('data-price', price);
+    productDiv.setAttribute('data-image', image);
+
+    productDiv.innerHTML = `
+        <a href="#">
+            <img src="${image}" alt="${name}">
+        </a>
+        <h3>${name}</h3>
+        <div class="star-rating">☆☆☆☆☆</div>
+        <p>${description}</p><br>
+        <p>₱${price}</p>
+        <button class="add-tocart">Add to Cart</button>
+        <button class="delete-product">Delete</button> <!-- Delete button -->
+    `;
+
+    productGrid.appendChild(productDiv);
+
+    // Attach event listener to delete button
+    productDiv.querySelector('.delete-product').addEventListener('click', () => {
+        removeProductFromGrid(productDiv);
+        removeProductFromLocalStorage(name); // Remove from localStorage
+    });
+}
+
+
+// Load products from localStorage on page load
+function loadProductsFromLocalStorage() {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+
+    products.forEach(product => {
+        addProductToGrid(product.name, product.description, product.price, product.image);
+    });
+}
+
+// Load products when the page is loaded
+document.addEventListener('DOMContentLoaded', loadProductsFromLocalStorage);
+
+// Remove product from UI (product grid)
+function removeProductFromGrid(productDiv) {
+    productDiv.remove(); // Remove the product div from the grid
+}
+
+// Remove product from localStorage
+function removeProductFromLocalStorage(name) {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    products = products.filter(product => product.name !== name); // Remove the product by name
+    localStorage.setItem('products', JSON.stringify(products)); // Update localStorage
+}
+
+// Close the modal
+function closeModal() {
+    document.getElementById('productModal').style.display = 'none';
+}
+
+    // Function to load cart items and display them in 'your-cart' container
+    function loadCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const reviewPaymentButton = document.getElementById('review-payment');
+
+        if (cart.length > 0) {
+            emptyCartMessage.style.display = 'none'; // Hide the empty cart message
+            reviewPaymentButton.disabled = false; // Enable the review payment button
+            cartItemsContainer.innerHTML = cart.map(product => `
+                <div class="cart-item">
+                    <img src="${product.image}" alt="${product.name}" class="cart-item-image" />
+                    <div class="cart-item-details">
+                        <h4>${product.name}</h4>
+                        <p>${product.description}</p>
+                        <span>₱${product.price.toFixed(2)}</span>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            emptyCartMessage.style.display = 'block'; // Show the empty cart message
+            reviewPaymentButton.disabled = true; // Disable the review payment button
+            cartItemsContainer.innerHTML = ''; // Clear cart items
+        }
+    }
+
+    
+    // Function to add item to the cart (localStorage)
+    function addToCart(name, description, price, image) {
+        try {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name, description, price, image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+        }
+    }
+</script>
+    <script src="../JAVA/script.js"></script>
+</body>
+</html>

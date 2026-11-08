@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        /* Popup sits above the fixed header */
+        .popup { z-index: 2000; }
+
+        /* Note shown when nobody is signed in */
+        .signin-note {
+            background: #fff3f0;
+            border: 1px solid #e3b7ab;
+            color: #a31b00;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+        .signin-note a { color: #a31b00; font-weight: bold; }
+
+        /* Order confirmation list */
+        .co-empty { padding: 10px 0; color: #555; }
+        .co-empty a { color: #a31b00; font-weight: bold; }
+        .co-line { padding: 10px 0; border-bottom: 1px dashed #ddd; }
+        .co-top { display: flex; justify-content: space-between; gap: 10px; font-weight: bold; font-size: 15px; }
+        .co-unit { display: flex; justify-content: space-between; gap: 10px; margin: 4px 0 0 12px; font-size: 13px; color: #555; }
+        .co-unit strong { color: #333; }
+
+        .co-edit {
+            display: inline-block;
+            margin: 10px 0 4px;
+            padding: 8px 14px;
+            border: 1px solid #a31b00;
+            border-radius: 6px;
+            color: #a31b00;
+            background: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .co-edit:hover { background: #a31b00; color: #fff; }
+
+        /* Buttons under the form */
+        .co-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        .co-buttons .continue-btn { margin-top: 0; }
+        .back-btn {
+            padding: 12px 20px;
+            border: 1px solid #a31b00;
+            border-radius: 4px;
+            background: #fff;
+            color: #a31b00;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .back-btn:hover { background: #a31b00; color: #fff; }
+        .continue-btn:disabled { background: #bbb; cursor: not-allowed; }
+
+        /* Stack the two sections on phones and tablets */
+        @media (max-width: 768px) {
+            .checkout-container { flex-direction: column; margin: 20px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">Secure Checkout with Wangs!</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <!-- Left Section -->
+            <div class="customer-details">
+                <h2>Customer Details</h2>
+                <div id="signin-note" class="signin-note" style="display: none;">
+                    You're not signed in, so these details can't be filled in automatically.
+                    <a href="signup.html">Sign in</a>
+                </div>
+                <form id="checkoutForm">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" required>
+
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" required>
+
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" required>
+
+                    <label for="country">Country/Region *</label>
+                    <select id="country">
+                        <option>Philippines</option>
+                        <option>Other</option>
+                    </select>
+
+                    <label for="address">Address *</label>
+                    <input type="text" id="address" required>
+
+                    <label for="city">City *</label>
+                    <input type="text" id="city" required>
+
+                    <label for="region">Region *</label>
+                    <input type="text" id="region" required>
+
+                    <label for="zip">Zip/Postal Code *</label>
+                    <input type="text" id="zip" required>
+                </form>
+
+                <div class="co-buttons">
+                    <a href="cart.html" class="back-btn">&larr; Back to cart</a>
+                    <button type="submit" form="checkoutForm" class="continue-btn" id="continue-btn">Continue</button>
+                </div>
+            </div>
+
+            <!-- Right Section -->
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="checkout-summary">
+                    <div id="order-items"></div>
+
+                    <a href="cart.html" class="co-edit"><i class="fas fa-pen"></i> Change order</a>
+
+                    <hr>
+
+                    <p>Subtotal: <span id="checkout-subtotal">₱0.00</span></p>
+                    <p>Delivery Fee: <span id="checkout-delivery">₱0.00</span></p>
+                    <p><strong>Total: <span id="checkout-total">₱0.00</span></strong></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-message">
+            <p>Your order has been processed. Please wait for the delivery update! Thank you for purchasing at WANGS!</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== Same prices and rules as the cart page =====
+        const ADDON_PRICE = {
+            'Egg Drop': 20, 'Egg Mix': 20, 'Boiled Egg': 25, 'Fried Egg': 25,
+            'Rice': 25, 'Kimchi': 20, 'Radish': 20, 'Cheese': 35
+        };
+        const COOK_FEE = 20;
+
+        const peso = n => '₱' + n.toFixed(2);
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c =>
+            ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        function readJSON(key, fallback) {
+            try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+            catch (e) { return fallback; }
+        }
+
+        const hasCook = p => /cooked/i.test(p.deliveryOption || '');
+        const copyExtras = list => list.map(e => ({ name: e.name, price: e.price }));
+
+        // One entry per item: { cooked, extras:[{name, price}] }
+        function getUnits(p) {
+            const qty = Math.max(1, p.quantity || 1);
+            let units;
+            if (Array.isArray(p.units) && p.units.length) {
+                units = p.units.map(u => ({ cooked: u.cooked !== false, extras: copyExtras(u.extras || []) }));
+            } else {
+                const extras = (p.additionals || '').split(',')
+                    .map(n => n.trim()).filter(Boolean)
+                    .map(n => ({ name: n, price: ADDON_PRICE[n] || 0 }));
+                const cooked = !/^\s*uncooked/i.test(p.deliveryOption || '');
+                units = [{ cooked, extras }];
+            }
+            while (units.length < qty) {
+                const last = units[units.length - 1];
+                units.push({ cooked: last.cooked, extras: copyExtras(last.extras) });
+            }
+            units.length = qty;
+            return units;
+        }
+
+        // Price of one item without cooking fee or extras
+        function getBase(p) {
+            if (typeof p.basePrice === 'number') return p.basePrice;
+            const extras = (p.additionals || '').split(',')
+                .map(n => n.trim()).filter(Boolean)
+                .reduce((s, n) => s + (ADDON_PRICE[n] || 0), 0);
+            return p.price - extras;
+        }
+
+        // Uncooked noodles have no additionals
+        const unitExtras = (p, u) => (!hasCook(p) || u.cooked) ? u.extras : [];
+        const unitCost = (p, u) =>
+            getBase(p)
+            + (hasCook(p) && u.cooked ? COOK_FEE : 0)
+            + unitExtras(p, u).reduce((s, e) => s + e.price, 0);
+
+        // ===== Order confirmation (right side) =====
+        function renderOrder() {
+            const cart = readJSON('cart', []).filter(p => p && p.name && p.price);
+            const box = document.getElementById('order-items');
+            const continueBtn = document.getElementById('continue-btn');
+            const editLink = document.querySelector('.co-edit');
+            let subtotal = 0;
+
+            if (!cart.length) {
+                box.innerHTML = '<div class="co-empty">Your cart is empty. <a href="products.html">Go to the shop</a></div>';
+                continueBtn.disabled = true;
+                if (editLink) editLink.style.display = 'none';
+            } else {
+                box.innerHTML = cart.map(p => {
+                    const units = getUnits(p);
+                    const qty = units.length;
+                    const lineTotal = units.reduce((s, u) => s + unitCost(p, u), 0);
+                    subtotal += lineTotal;
+
+                    const detail = units.map((u, i) => {
+                        const parts = [];
+                        if (hasCook(p)) parts.push(u.cooked ? 'Cooked' : 'Uncooked');
+                        const names = unitExtras(p, u).map(e => e.name);
+                        if (names.length) parts.push(names.join(', '));
+                        else if (hasCook(p)) parts.push('No additionals');   // only noodles show this
+
+                        if (!parts.length) return '';
+                        return `
+                            <div class="co-unit">
+                                <span>${qty > 1 ? `<strong>Item ${i + 1}</strong> · ` : ''}${esc(parts.join(' · '))}</span>
+                                ${qty > 1 ? `<span>${peso(unitCost(p, u))}</span>` : ''}
+                            </div>`;
+                    }).join('');
+
+                    return `
+                        <div class="co-line">
+                            <div class="co-top">
+                                <span>${qty}x ${esc(p.name)}</span>
+                                <span>${peso(lineTotal)}</span>
+                            </div>
+                            ${detail}
+                        </div>`;
+                }).join('');
+            }
+
+            // Delivery fee comes from the cart page
+            const data = readJSON('checkoutData', {});
+            const delivery = cart.length ? (parseFloat(data.deliveryFee) || 0) : 0;
+            const total = subtotal + delivery;
+
+            document.getElementById('checkout-subtotal').textContent = peso(subtotal);
+            document.getElementById('checkout-delivery').textContent = peso(delivery);
+            document.getElementById('checkout-total').textContent = peso(total);
+        }
+
+        // ===== Fill the customer details from the signed-in account =====
+        function fillCustomerDetails() {
+            const user = localStorage.getItem('currentUser');
+            const acc = user
+                ? readJSON('accounts', []).find(a => a.username.toLowerCase() === user.toLowerCase())
+                : null;
+
+            if (!acc) {
+                document.getElementById('signin-note').style.display = 'block';
+                return;
+            }
+
+            const set = (id, value) => {
+                const el = document.getElementById(id);
+                if (el && value) el.value = value;
+            };
+            set('email', acc.email);
+            set('firstName', acc.firstName);
+            set('lastName', acc.lastName);
+            set('phone', acc.phone);
+            set('address', acc.barangay);        // barangay
+            set('city', acc.municipality);       // municipality / city
+            set('region', acc.province);         // province
+            set('zip', acc.postalCode);
+        }
+
+        // ===== Continue: the browser checks the required fields, then the order is placed =====
+        document.getElementById('checkoutForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const cart = readJSON('cart', []).filter(p => p && p.name && p.price);
+            if (!cart.length) return; // nothing to order
+
+            placeOrder();
+            showPopup();
+        });
+
+        function placeOrder() {
+            // Remove every item (including its additionals/units) and the saved delivery fee
+            localStorage.removeItem('cart');
+            localStorage.removeItem('checkoutData');
+
+            // Also remove this account's saved cart, so logging out and in doesn't bring it back
+            const user = localStorage.getItem('currentUser');
+            if (user) localStorage.removeItem('cart_' + user.toLowerCase());
+
+            // Clear what's shown on this page too
+            renderOrder();
+
+            // Stop a second click from placing the order again
+            document.getElementById('continue-btn').disabled = true;
+        }
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            // Redirect to the product page after closing the popup
+            window.location.href = 'products.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fillCustomerDetails();
+            renderOrder();
+        });
+    </script>
+
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

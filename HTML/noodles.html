@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <link rel="getElementById('cart-count')" href="../JAVA/script.js">
+
+</head>
+<body onload="updateCartCount(); loadCart();">
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">Team</a>
+                            <a href="store_policy.html">Store Policy</a>
+                            <a href="contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <br>
+
+    <main>
+        <div class="content-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>All Items</h3>
+                <ul class="shop-categories">
+                    <li>
+                        <strong>
+                            SHOP
+                            <button class="toggle-button" data-target="shop-content">+</button>
+                        </strong>
+                        <ul id="shop-content" class="sub-categories" style="display: none;">
+                            <li><a href="products.html">All</a></li>
+                            <li><a href="noodles.html">Noodles</a></li>
+                            <li><a href="kimbap.html">Kimbap</a></li>
+                            <li><a href="appetizer.html">Appetizer</a></li>
+                            <li><a href="rice.html">Rice</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>
+                            FLAVOR
+                            <button class="toggle-button" data-target="flavor-content">+</button>
+                        </strong>
+                        <ul id="flavor-content" class="sub-categories" style="display: none;">
+                            <li><a href="spicy.html">Spicy</a></li>
+                            <li><a href="cheese.html">Cheese</a></li>
+                            <li><a href="egg.html">Egg</a></li>
+                            <li><a href="kimchi.html">Kimchi</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <h4>
+                            Price
+                            <button class="toggle-button" data-target="price-content">+</button>
+                        </h4>
+                        <div class="filter-content" id="price-content" style="display: none;">
+                            <input type="range" id="price-range" min="10" max="200" step="10" value="100" onchange="filterProductsByPrice()">
+                            <div class="price-values">
+                                <span>₱10.00</span>
+                                <span>₱200.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        <div class="productName-container">
+            <h2>NOODLES</h2>
+
+        </div>
+            <!-- Product Section -->
+            <section class="product-section">
+                <div class="sort-options">
+                    <label for="sort">Sort By:</label>
+                    <select id="sort">
+                        <option value="low-to-high">Prices: Low to High</option>
+                        <option value="high-to-low">Prices: High to Low</option>
+                    </select>
+                </div>
+                <div class="product-grid">
+             <!-- NOODLES -->
+             <div class="product" data-name="SHIN Ramyun" data-description="Iconic Korean spicy ramen." data-price="130.00" data-image="../IMAGES/drive img/Shin-Ramyun.png">
+                <a href="../clickableItems/shin-ramyun.html">
+                <img src="../IMAGES/drive img/Shin-Ramyun.png" alt="SHIN Ramyun">
+                </a>
+                <h3>SHIN Ramyun</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Iconic Korean spicy ramen.</p><br>
+                <p>₱130.00</p>
+                leave it empty
+            </div>
+            
+            <div class="product" data-name="JIN Ramen (Mild)" data-description="Balanced flavors with a gentle kick." data-price="130.00" data-image="../IMAGES/drive img/Jin-Ramen-Mild.png">
+                <a href="../clickableItems/Jin-Ramen-Mild.html">
+                <img src="../IMAGES/drive img/Jin-Ramen-Mild.png" alt="JIN Ramen (Mild)">
+                </a>
+                <h3>JIN Ramen (Mild)</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>Balanced flavors with a gentle kick.</p><br>
+                <p>₱130.00</p>
+            </div>
+            
+            <div class="product" data-name="JIN Ramen (Spicy)" data-description="For spice lovers craving bold heat." data-price="130.00" data-image="../IMAGES/drive img/Jin-Ramen-spicy (1).png">
+                <a href="../clickableItems/Jin-Ramen-spicy.html">
+                <img src="../IMAGES/drive img/Jin-Ramen-spicy (1).png" alt="JIN Ramen (Spicy)">
+                </a>
+                <h3>JIN Ramen (Spicy)</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>For spice lovers craving bold heat.</p><br>
+                <p>₱130.00</p>
+            </div>
+            
+            <div class="product" data-name="Cheese Ramen" data-description="Creamy, cheesy goodness with a ramen twist." data-price="130.00" data-image="../IMAGES/drive img/Cheese-Ramen.png">
+                <a href="../clickableItems/Cheese-Ramen.html">
+                <img src="../IMAGES/drive img/Cheese-Ramen.png" alt="Cheese Ramen">
+                </a>
+                <h3>Cheese Ramen</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Creamy, cheesy goodness with a ramen twist.</p><br>
+                <p>₱130.00</p>
+            </div>
+            
+            <div class="product" data-name="Kimchi Ramen" data-description="A tangy, spicy bowl infused with kimchi flavors." data-price="130.00" data-image="../IMAGES/drive img/Kimchi-Ramen.png">
+                <a href="../clickableItems/Kimchi-Ramen.html">
+                <img src="../IMAGES/drive img/Kimchi-Ramen.png" alt="Kimchi Ramen">
+                </a>
+                <h3>Kimchi Ramen</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>A tangy, spicy bowl infused with kimchi flavors.</p><br>
+                <p>₱130.00</p>
+            </div>
+                </div>
+            </section>
+</div>
+ </main>
+
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+
+ <footer class="footer">
+     <p>&copy; 2024 Wangs. All rights reserved.</p>
+ </footer>
+
+ <script src="../JAVA/script.js"></script>
+</body>
+</html>

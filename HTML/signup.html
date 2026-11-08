@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up & Log In | Wangs - Korean Noodle Shop</title>
+        <link rel="stylesheet" href="../CSS/home.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    </head>
+   
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="logo-tagline">
+                    <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                    <span class="tagline">WANGS!</span>
+                    <p>Spice up your life with</p>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <div class="dropdown">
+                            <button class="dropbtn">About Us</button>
+                            <div class="dropdown-content">
+                                <a href="team.html">Team</a>
+                                <a href="store_policy.html">Store Policy</a>
+                                <a href="contact.html">Contact Us</a>
+                            </div>
+                        </div>
+                        <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                        <li>
+                            <a href="cart.html">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count" class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+
+    <div class="container">
+        <div class="form-container">
+            <!-- Existing Customers -->
+            <div class="existing-customers">
+                <h2>Existing Customers</h2>
+                <br>
+                <p>Please enter your username and password below:</p>
+                <br>
+                <form id="loginForm">
+                    <label for="username">Username</label>
+                    <div class="input-icon">
+                        <i class="fas fa-user"></i> <!-- Username Icon -->
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+
+                    <label for="password">Password</label>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i> <!-- Password Icon -->
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+
+            <!-- New Customers -->
+            <div class="new-customers">
+                <h2>New Customers</h2>
+                <br>
+                <p>First time ordering with us? Create a new account, it's quick and simple:</p>
+                <br>
+                <a href="createAccount.html" class  ="create-account-btn">Create a new account</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../JAVA/script.js"></script>
+</body>
+</html>

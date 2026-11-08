@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+</head>
+<body onload="updateCartCount(); loadCart();">
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">Team</a>
+                            <a href="store_policy.html">Store Policy</a>
+                            <a href="contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Subnavigation Menu -->
+    <div class="subnavigation">
+        <ul>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="store_policy.html">Store Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Description Section -->
+    <div class="container-description">
+    <section class="description">
+        <h1>Wangs - Korean Convenience Store Website</h1>
+        <p>
+            Wangs is an e-commerce website that brings the authentic flavors of Korea to your doorstep. The website is inspired by the physical store <strong>Wang</strong>, located at 
+            Lapu-Lapu Airport Rd, MEPZ 1, Lapu-Lapu City, Cebu</em>. To emphasize its connection to the original store and give it a distinct identity online, we added an "s" to the name, transforming it into <strong>Wangs</strong>.
+        </p>
+        <p>
+            This platform offers a variety of Korean and Japanese products, including noodles, kimbap, and kimchi. With detailed sections for each product category, customers can easily explore their favorite items. The website is designed to make shopping convenient, while staying true to the authentic charm of the original store.
+        </p>
+        <p>
+            Whether you're craving the spice of SHIN Ramyun or the tang of fresh kimchi, Wangs combines online convenience with the trust and authenticity of its physical location.
+        </p>
+        <p>
+            <strong>Contact Us:</strong><br>
+            Facebook: <a href="https://www.facebook.com/BandMMart" target="_blank">https://www.facebook.com/BandMMart</a><br>
+            Call Us: 0324940112
+        </p>
+        </section>
+        <div class="store-pic-container">
+            <div class="store-details">
+                <img src="../IMAGES/boy_holding_a_noodle.png" class="img1">
+                <a href="../Images/StorePic.png">
+                <img src="../IMAGES/StorePic.png" class="img2">
+                </a>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d825.1723273827911!2d123.97693728365041!3d10.32561613188783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9977f98528109%3A0x3c171b1387144d1!2sWang!5e0!3m2!1sen!2sph!4v1733226910294!5m2!1sen!2sph" width="700" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    
+
+    <br><br><br><br><br>
+
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../JAVA/script.js"></script> <!-- Link to external JS file -->
+</body>
+</html>

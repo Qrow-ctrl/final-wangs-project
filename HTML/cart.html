@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Wangs</title>
+    <link rel="stylesheet" href="../CSS/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        /* Move everything up, right under the header (change 100px to go higher or lower) */
+        body { margin-top: 100px !important; }
+
+        /* Cart rows: layout that matches the markup below */
+        .cart-item-details { flex: 1; padding: 0 15px; }
+        .cart-item-details h4 { margin-bottom: 4px; }
+        .product-quantity { display: flex; align-items: center; gap: 6px; margin-right: 20px; }
+        .product-quantity input {
+            width: 40px; height: 28px; text-align: center;
+            border: 1px solid #ddd; border-radius: 4px; font-size: 14px;
+        }
+        .product-quantity button { padding: 0.3em 0.8em; }
+        .remove-btn { padding: 0.5em 0.9em; }
+        .cart-item img { object-fit: cover; }
+
+        /* Order Summary item headings + Change order pop-up item sections */
+        .unit-heading { font-size: 14px; font-weight: bold; margin-top: 6px; }
+        .item-head { margin-bottom: 8px; }
+        .item-head strong { margin: 0; }
+
+        /* Sub-rows: one per item when the quantity is 2 or more */
+        .cart-subitems {
+            margin: 0 0 10px 40px;
+            padding-left: 14px;
+            border-left: 2px solid #e3b7ab;
+        }
+        .cart-subitem {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e2e2e2;
+        }
+        .cart-subitem:last-child { border-bottom: none; }
+        .cart-subitem img {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .sub-info { flex: 1; min-width: 0; }
+        .sub-title { font-size: 14px; font-weight: bold; }
+        .sub-detail { font-size: 12px; color: #666; line-height: 1.4; }
+        .sub-price { font-size: 14px; font-weight: bold; white-space: nowrap; }
+
+        @media (max-width: 480px) {
+            .cart-subitems { margin-left: 12px; padding-left: 10px; }
+            .cart-subitem img { width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="team.html">Team</a>
+                            <a href="store_policy.html">Store Policy</a>
+                            <a href="contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <!-- Cart Items Section -->
+        <div class="cart-items">
+            <h2 class="cart-header">My Cart</h2>
+            <div id="cart-items">
+                <!-- Dynamically loaded cart items will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Order Summary Section -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div id="summary-items"></div>
+
+            <div class="summary-item">
+                <span class="label">Subtotal</span>
+                <span class="value">₱<span id="subtotal">0.00</span></span>
+            </div>
+
+            <div class="summary-item">
+                <span class="label">Delivery</span>
+                <div class="value">
+                    <select id="place-selector" onchange="updateDelivery()">
+                        <option value="150" data-place="Central Visayas, Philippines">Central Visayas - ₱150</option>
+                        <option value="200" data-place="Metro Manila">Metro Manila - ₱200</option>
+                        <option value="100" data-place="Luzon Area">Luzon Area - ₱100</option>
+                        <option value="250" data-place="Mindanao Area">Mindanao - ₱250</option>
+                    </select>
+                </div>
+                <span id="delivery-price" class="price">₱150</span>
+            </div>
+
+            <hr class="summary-divider">
+
+            <div class="summary-total">
+                <span class="label">Total</span>
+                <span class="value">₱<span id="total">0.00</span></span>
+            </div>
+
+            <div class="checkout-buttons">
+                <a href="../HTML/checkOut.html">
+                <button onclick="checkout()">Checkout</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <center>
+        <div class="center-button">
+            <button class="clear-cart-button" onclick="clearCart()">Clear Cart</button>
+        </div>
+    </center>
+
+    <script>
+        // ===== Additionals list (same names and prices as the product pages) =====
+        const ADDONS = [
+            ['Egg Drop', 20], ['Egg Mix', 20], ['Boiled Egg', 25], ['Fried Egg', 25],
+            ['Rice', 25], ['Kimchi', 20], ['Radish', 20], ['Cheese', 35]
+        ];
+        const ADDON_PRICE = Object.fromEntries(ADDONS);
+
+        // Cooking a noodle adds this to its price
+        const COOK_FEE = 20;
+        const COOKED_TEXT = 'Cooked - ₱20';
+        const UNCOOKED_TEXT = 'Uncooked - ₱0';
+
+        // ===== Noodle photos: 1st image = packaging (uncooked), 2nd image = cooked =====
+        const IMG_DIR = '../IMAGES/drive img/';
+        const COOKED_IMAGE = {
+            'shin-ramyun.png':         'Ramyun.jpg',
+            'jin-ramen-mild.png':      'Jinramen.jpg',
+            'jin-ramen-spicy (1).png': 'jinramenspicy.jpg',
+            'cheese-ramen.png':        'cheeseramen.jpg',
+            'kimchi-ramen.png':        'kimchiramen.jpg'
+        };
+
+        // The cooked photo for a product (falls back to its normal photo if none is listed)
+        function cookedImage(p) {
+            let file = (p.image || '').split('/').pop();
+            try { file = decodeURIComponent(file); } catch (e) {}
+            const second = COOKED_IMAGE[file.toLowerCase()];
+            return second ? IMG_DIR + second : p.image;
+        }
+
+        const peso = n => '₱' + (Number.isInteger(n) ? n : n.toFixed(2));
+        const saveCart = cart => localStorage.setItem('cart', JSON.stringify(cart));
+        const readCart = () => JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Does this product offer Cooked / Uncooked? (noodles do)
+        const hasCookOption = p => /cooked/i.test(p.deliveryOption || '');
+
+        const copyExtras = list => list.map(e => ({ name: e.name, price: e.price }));
+        const copyUnit = u => ({ cooked: u.cooked, extras: copyExtras(u.extras) });
+
+        // One entry per item: { cooked, extras:[{name, price}] }
+        // New items start as a copy of the last one; "Change order" lets you make them different.
+        function getUnits(p) {
+            const qty = Math.max(1, p.quantity || 1);
+            let units;
+
+            if (Array.isArray(p.units) && p.units.length) {
+                units = p.units.map(u => ({ cooked: u.cooked !== false, extras: copyExtras(u.extras || []) }));
+            } else {
+                const extras = (p.additionals || '').split(',')
+                    .map(n => n.trim()).filter(Boolean)
+                    .map(n => ({ name: n, price: ADDON_PRICE[n] || 0 }));
+                const cooked = !/^\s*uncooked/i.test(p.deliveryOption || '');
+                units = [{ cooked, extras }];
+            }
+
+            // Extra items copy the last one; fewer items just drop the last ones
+            while (units.length < qty) units.push(copyUnit(units[units.length - 1]));
+            units.length = qty;
+            return units;
+        }
+
+        // Which photo the cart row shows: cooked photo only when every item is cooked
+        function cartImage(p) {
+            if (!hasCookOption(p)) return p.image;
+            return getUnits(p).every(u => u.cooked) ? cookedImage(p) : p.image;
+        }
+
+        // Photo for one single item (used by the sub-rows)
+        function unitImage(p, u) {
+            if (!hasCookOption(p)) return p.image;
+            return u.cooked ? cookedImage(p) : p.image;
+        }
+
+        // Price of one item without cooking fee or extras
+        function getBase(p) {
+            if (typeof p.basePrice === 'number') return p.basePrice;
+            const extras = (p.additionals || '').split(',')
+                .map(n => n.trim()).filter(Boolean)
+                .reduce((s, n) => s + (ADDON_PRICE[n] || 0), 0);
+            return p.price - extras;
+        }
+
+        // Extras that count for an item (uncooked noodles have none)
+        const unitExtras = (p, u) => (!hasCookOption(p) || u.cooked) ? u.extras : [];
+        const unitFee = (p, u) => (hasCookOption(p) && u.cooked) ? COOK_FEE : 0;
+        const unitCost = (p, u) =>
+            getBase(p) + unitFee(p, u) + unitExtras(p, u).reduce((s, e) => s + e.price, 0);
+
+        const lineTotal = p => getUnits(p).reduce((sum, u) => sum + unitCost(p, u), 0);
+
+        function deliveryText(units) {
+            const c = units.filter(u => u.cooked).length;
+            const n = units.length - c;
+            if (!n) return COOKED_TEXT;
+            if (!c) return UNCOOKED_TEXT;
+            return `${c} Cooked, ${n} Uncooked`;
+        }
+
+        // Are all items in this line exactly the same?
+        const signature = (p, u) =>
+            (u.cooked ? 1 : 0) + '|' + unitExtras(p, u).map(e => e.name).sort().join(',');
+        const allSame = (p, units) => units.every(u => signature(p, u) === signature(p, units[0]));
+
+        // Save the items back into the fields the rest of the site reads
+        function syncItem(p, units) {
+            p.basePrice = getBase(p);          // read before the price changes
+            p.units = units;
+            p.quantity = units.length;
+
+            const all = units.flatMap(u => unitExtras(p, u));
+            p.extras = all;
+            p.additionals = all.map(e => e.name).join(', ');
+            p.price = lineTotal(p) / units.length;
+            if (hasCookOption(p)) p.deliveryOption = deliveryText(units);
+        }
+
+        // Remove one additional. unitIndex -1 = from every item.
+        function removeExtra(index, unitIndex, name) {
+            const cart = readCart();
+            const p = cart[index];
+            if (!p) return;
+
+            const units = getUnits(p);
+            const targets = unitIndex < 0 ? units : [units[unitIndex]];
+            targets.forEach(u => {
+                if (!u) return;
+                const at = u.extras.findIndex(e => e.name === name);
+                if (at > -1) u.extras.splice(at, 1);
+            });
+
+            syncItem(p, units);
+            saveCart(cart);
+            loadCart();
+        }
+
+        // Pop-up: a separate section for every item when the quantity is 2 or more
+        function editOrder(index) {
+            const cart = readCart();
+            const p = cart[index];
+            if (!p) return;
+
+            const units = getUnits(p);
+            const cookOpt = hasCookOption(p);
+            const base = getBase(p);
+            const multi = units.length > 1;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'edit-modal-overlay';
+            overlay.innerHTML = `
+                <div class="edit-modal">
+                    <h3>${p.name}</h3>
+                    <p class="edit-modal-hint">${multi
+                        ? 'Set each item on its own.'
+                        : (cookOpt ? 'Choose cooked or uncooked, then tick the additionals.'
+                                   : 'Tick the additionals you want.')}</p>
+                    <div class="edit-modal-body">
+                        ${units.map((u, i) => `
+                            <div class="item-block">
+                                ${multi ? `
+                                    <div class="item-head">
+                                        <strong>Item ${i + 1} of ${units.length}</strong>
+                                    </div>` : ''}
+                                ${cookOpt ? `
+                                    <div class="cook-choice">
+                                        <label><input type="radio" name="cook-${i}" value="cooked" ${u.cooked ? 'checked' : ''}> Cooked +${peso(COOK_FEE)}</label>
+                                        <label><input type="radio" name="cook-${i}" value="uncooked" ${u.cooked ? '' : 'checked'}> Uncooked</label>
+                                    </div>` : ''}
+                                <div class="extras-list">
+                                    ${ADDONS.map(([name, price]) => `
+                                        <label>
+                                            <input type="checkbox" value="${name}" data-price="${price}"
+                                                   ${u.extras.some(e => e.name === name) ? 'checked' : ''}>
+                                            ${name} +₱${price.toFixed(2)}
+                                        </label>`).join('')}
+                                </div>
+                            </div>`).join('')}
+                    </div>
+                    <div class="edit-modal-footer">
+                        <span class="edit-total"></span>
+                        <button type="button" class="edit-cancel">Cancel</button>
+                        <button type="button" class="edit-save">Save</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(overlay);
+
+            const blocks = Array.from(overlay.querySelectorAll('.item-block'));
+            const totalEl = overlay.querySelector('.edit-total');
+
+            const readUnit = block => {
+                const cookedRadio = block.querySelector('input[type="radio"][value="cooked"]');
+                const cooked = cookedRadio ? cookedRadio.checked : true;
+                const extras = Array.from(block.querySelectorAll('input[type="checkbox"]:checked'))
+                    .map(b => ({ name: b.value, price: parseFloat(b.dataset.price) }));
+                return { cooked, extras };
+            };
+
+            const refresh = () => {
+                let total = 0;
+                blocks.forEach(block => {
+                    const u = readUnit(block);
+                    const counted = !cookOpt || u.cooked;
+                    block.querySelector('.extras-list').style.display = counted ? '' : 'none';
+                    total += base
+                        + (cookOpt && u.cooked ? COOK_FEE : 0)
+                        + (counted ? u.extras.reduce((s, e) => s + e.price, 0) : 0);
+                });
+                totalEl.textContent = 'Total: ' + peso(total);
+            };
+
+            overlay.addEventListener('change', refresh);
+            refresh();
+
+            overlay.querySelector('.edit-cancel').addEventListener('click', () => overlay.remove());
+            overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+            overlay.querySelector('.edit-save').addEventListener('click', () => {
+                const newUnits = blocks.map(readUnit);
+                overlay.remove();
+                syncItem(p, newUnits);
+                saveCart(cart);
+                loadCart();
+            });
+        }
+
+        // Order Summary: all the details live here. Cooked / Uncooked is chosen in "Change order".
+        function renderSummaryItems(cart) {
+            const box = document.getElementById('summary-items');
+            if (!box) return;
+
+            box.innerHTML = cart.map((p, index) => {
+                if (!p.name || !p.price) return '';
+
+                const units = getUnits(p);
+                const qty = units.length;
+                const cookOpt = hasCookOption(p);
+
+                // One row for cooked/uncooked + one row per extra
+                const rows = (u, ui, times) => `
+                    ${cookOpt ? `
+                        <div class="extra-row">
+                            <span>${u.cooked ? 'Cooked' : 'Uncooked'}</span>
+                            <span>${u.cooked ? '+' + peso(COOK_FEE * times) : ''}</span>
+                        </div>` : ''}
+                    ${unitExtras(p, u).map(e => `
+                        <div class="extra-row">
+                            <span>${e.name}</span>
+                            <span>+${peso(e.price * times)}
+                                <button type="button" class="extra-remove" title="Remove ${e.name}"
+                                        onclick="removeExtra(${index}, ${ui}, '${e.name}')">&times;</button>
+                            </span>
+                        </div>`).join('')}`;
+
+                // All items the same: show them once. Different: show each item.
+                const body = allSame(p, units)
+                    ? rows(units[0], -1, qty)
+                    : units.map((u, ui) => `
+                        <div class="unit-heading">Item ${ui + 1}</div>
+                        ${rows(u, ui, 1)}`).join('');
+
+                return `
+                    <div class="order-line">
+                        <div class="order-line-top">
+                            <span>${qty}x ${p.name}</span>
+                            <span>${peso(lineTotal(p))}</span>
+                        </div>
+                        ${body}
+                        ${cookOpt ? `<button type="button" class="edit-order-btn" onclick="editOrder(${index})">Change order</button>` : ''}
+                    </div>`;
+            }).join('');
+        }
+
+        // Sub-rows under a product: one per item, each with its own picture (quantity 2 or more)
+        function renderSubItems(p) {
+            const units = getUnits(p);
+            if (units.length < 2) return '';
+
+            const cookOpt = hasCookOption(p);
+
+            return `
+                <div class="cart-subitems">
+                    ${units.map((u, i) => {
+                        const parts = [];
+                        if (cookOpt) parts.push(u.cooked ? 'Cooked' : 'Uncooked');
+                        const names = unitExtras(p, u).map(e => e.name);
+                        if (names.length) parts.push(names.join(', '));
+                        else if (cookOpt) parts.push('No additionals');   // only noodles show this
+
+                        return `
+                            <div class="cart-subitem">
+                                <img src="${unitImage(p, u)}" alt="${p.name} - Item ${i + 1}">
+                                <div class="sub-info">
+                                    <div class="sub-title">Item ${i + 1}</div>
+                                    ${parts.length ? `<div class="sub-detail">${parts.join(' · ')}</div>` : ''}
+                                </div>
+                                <div class="sub-price">${peso(unitCost(p, u))}</div>
+                            </div>`;
+                    }).join('')}
+                </div>`;
+        }
+
+        // Load cart items from localStorage and display them
+        function loadCart() {
+            const cart = readCart();
+            const cartItemsContainer = document.getElementById('cart-items');
+            let subtotal = 0;
+
+            if (cartItemsContainer) {
+                if (cart.length > 0) {
+                    cartItemsContainer.innerHTML = cart.map((product, index) => {
+                        if (!product.name || !product.price || !product.image) {
+                            console.error("Invalid product data in cart:", product);
+                            return '';
+                        }
+
+                        subtotal += lineTotal(product);
+
+                        return `
+                            <div class="cart-item">
+                                <img src="${cartImage(product)}" alt="${product.name}" class="cart-item-image">
+                                <div class="cart-item-details">
+                                    <h4>${product.name}</h4>
+                                </div>
+                                <div class="product-quantity">
+                                    <button onclick="changeQuantity(${index}, -1)">-</button>
+                                    <input type="text" value="${product.quantity || 1}" readonly>
+                                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                                </div>
+                                <button class="remove-btn" onclick="removeFromCart(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            ${renderSubItems(product)}
+                        `;
+                    }).join('');
+                } else {
+                    cartItemsContainer.innerHTML = `
+                        <div class="empty-cart">
+                            <img src="../IMAGES/noodles_yummy.png" alt="Empty Cart" style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+                            <p style="text-align: center; font-weight: bold;">Hungry?</p>
+                            <p style="text-align: center;">You haven't added anything to your cart!</p>
+                        </div>
+                    `;
+                }
+            }
+
+            renderSummaryItems(cart);
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            updateDelivery();
+        }
+
+        // Update the delivery fee and total price
+        function updateDelivery() {
+            const placeSelector = document.getElementById('place-selector');
+            const deliveryFee = parseFloat(placeSelector.value) || 0;
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent) || 0;
+
+            document.getElementById('delivery-price').textContent = `₱${deliveryFee.toFixed(2)}`;
+
+            const total = subtotal + deliveryFee;
+            document.getElementById('total').textContent = total.toFixed(2);
+
+            // Save subtotal, delivery fee, and total for checkout
+            localStorage.setItem('checkoutData', JSON.stringify({
+                subtotal: subtotal.toFixed(2),
+                deliveryFee: deliveryFee.toFixed(2),
+                total: total.toFixed(2)
+            }));
+        }
+
+        // Change quantity: a new item is a copy of the last item
+        function changeQuantity(index, change) {
+            const cart = readCart();
+            const p = cart[index];
+            if (!p) return;
+
+            const units = getUnits(p);
+            const newQty = Math.max(1, units.length + change);
+            while (units.length < newQty) units.push(copyUnit(units[units.length - 1]));
+            units.length = newQty;
+
+            syncItem(p, units);
+            saveCart(cart);
+            loadCart();
+        }
+
+        // Remove a product from the cart
+        function removeFromCart(index) {
+            const cart = readCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            loadCart();
+            updateCartCount();
+        }
+
+        // Clear the cart
+        function clearCart() {
+            localStorage.removeItem('cart');
+            loadCart();
+            updateCartCount();
+        }
+
+        // Update cart count in the header
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = readCart().length;
+        }
+
+        // Make sure the cart loads on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+            loadCart();
+        });
+    </script>
+
+    <br>
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="../JAVA/script.js"></script>
+</body>
+</html>

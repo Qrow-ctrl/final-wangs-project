@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Policy  Wangs</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+   </head> 
+    <body onload="updateCartCount(); loadCart();">
+        <header>
+            <div class="header-container">
+                <div class="logo-tagline">
+                    <img src="../IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                    <span class="tagline">WANGS!</span>
+                    <p>Spice up your life with</p>
+                </div>
+                <nav class="main-navigation">
+                    <ul>
+                <li><a href="../index.html" class="active">Home</a></li>
+                        <li><a href="products.html">Shop</a></li>
+                        <div class="dropdown">
+                            <button class="dropbtn">About Us</button>
+                            <div class="dropdown-content">
+                                <a href="team.html">Team</a>
+                                <a href="store_policy.html">Store Policy</a>
+                                <a href="contact.html">Contact Us</a>
+                            </div>
+                        </div>
+                        <li><a href="signup.html"><i class="fas fa-user"></i></a></li>
+                        <li>
+                            <a href="cart.html">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count" class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    <!-- Subnavigation Menu -->
+    <div class="subnavigation">
+        <ul>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="store_policy.html">Store Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Store Policy Section -->
+    <div class="policy-container">
+        <!-- Main Title -->
+        <div class="title-container">
+            <h1>Store Policy</h1>
+        </div>
+
+        <!-- Refund Policy -->
+        <div class="section-container">
+            <h2>1. Refund Policy</h2>
+            <ul>
+                <li>We will refund or exchange items when they are:
+                    <ul>
+                        <li>Damaged in packaging or the product itself.</li>
+                        <li>Discordant with the customer’s original order.</li>
+                    </ul>
+                </li>
+                <li>Procedure for Refund:
+                    <ul>
+                        <li>Show us evidence of the damaged item with its receipt through our store cellphone or Messenger.</li>
+                        <li>Return the damaged item with the receipt within 7 working days – shipping charges will be covered by Wangs.</li>
+                        <li>Refund to customer’s bank account or exchange the item.</li>
+                    </ul>
+                </li>
+                <li>Items purchased from Wangs.com are not eligible for return, exchange, or refund for any other reasons.</li>
+            </ul>
+        </div>
+
+        <!-- Delivery Rules -->
+        <div class="section-container">
+            <h2>2. Delivery Rules</h2>
+            <ul>
+                <li>Free Delivery:
+                    <ul>
+                        <li>Area 1: Minimum order PHP 1,500 (Delivery charge PHP 150 for orders below the minimum).</li>
+                        <li>Area 2: Minimum order PHP 3,000 (Delivery charge PHP 250 for orders below the minimum).</li>
+                        <li>Province 1: Minimum order PHP 5,000 (Delivery charge PHP 500 for orders below the minimum).</li>
+                        <li>Province 2: Minimum order PHP 10,000 (Delivery charge PHP 1,000 for orders below the minimum).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="section-container">
+            <h2>3. Personal Information</h2>
+            <ul>
+                <li>The store will ask for basic information for better service, only with customer consent:
+                    <ul>
+                        <li>Name or nickname.</li>
+                        <li>Bank account details (if needed for refund).</li>
+                        <li>Cellphone number and address for delivery.</li>
+                        <li>User name and email address for signing up on our site.</li>
+                    </ul>
+                </li>
+                <li>Personal information will not be used for any purposes other than purchasing and refunding.</li>
+            </ul>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="section-container">
+            <h2>4. Payment Methods</h2>
+            <ul>
+                <li>G-Cash</li>
+                <li>PayPal</li>
+                <li>Bank Transfer (BPI)</li>
+                <li>Cash on Delivery (Area 1 Only)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+
+    <script src="../JAVA/script.js"></script> <!-- Link to external JS file -->
+</body>
+</html>
