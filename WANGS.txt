@@ -1,0 +1,445 @@
+index.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wangs - Korean Noodle Shop</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Wangs</h1>
+        <p class="tagline">Spice Up Your Life With Wangs!</p>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="../MAIN/">About Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="sub-navigation">
+        <ul>
+            <li><a href="noodles.html">Noodles</a></li>
+            <li><a href="kimbap.html">Kimbap</a></li>
+            <li><a href="kimchi.html">Kimchi</a></li>
+        </ul>
+    </nav>
+
+    <footer>
+        <p>&copy; 2024 Wangs. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+cart.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Wangs</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Your Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Cart Content -->
+    <section class="product-grid" id="cart-items">
+        <!-- Cart items will be injected here by JavaScript -->
+    </section>
+
+    <center>
+        <button onclick="clearCart()">Clear Cart</button>
+    </center>
+
+    <!-- JavaScript to load and display cart items -->
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach((product, index) => {
+                    let productCard = document.createElement('div');
+                    productCard.classList.add('product');
+
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <button onclick="removeFromCart(${index})">Remove from Cart</button>
+                    `;
+
+                    cartItemsContainer.appendChild(productCard);
+                });
+            }
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart(); // Refresh cart display
+            alert('Item removed from your cart.');
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            loadCart(); // Reload cart items
+            alert('Your cart has been cleared.');
+        }
+
+        window.onload = loadCart;
+    </script>
+</body>
+</html>
+
+about.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Wangs</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>About Us</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Us Content -->
+    <section>
+        <p>Welcome to Wangs, your go-to Korean convenience store for authentic Korean and Japanese noodles.</p>
+    </section>
+
+    <!-- Group Members Section -->
+    <section>
+        <h2>Group Members</h2>
+        <ul>
+            <li>Member 1</li>
+            <li>Member 2</li>
+            <li>Member 3</li>
+            <li>Member 4</li>
+        </ul>
+    </section>
+</body>
+</html>
+
+noodles.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noodles - Wangs</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Noodles</h1>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button onclick="history.back()" class="back-button">Back</button>
+
+    <section class="product-grid">
+        <div class="product" onclick="addToCart('SHIN Ramyun', 'Spicy Korean noodle classic', 3.99, '../IMAGES/ramyun.jpg')">
+            <img src="../IMAGES/ramyun.jpg" alt="SHIN Ramyun">
+            <h3>SHIN Ramyun</h3>
+            <p>Spicy Korean noodle classic</p>
+            <p>$3.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product" onclick="addToCart('Japanese Ramen', 'Traditional soy-based ramen', 4.50, '../IMAGES/jinramen.jpg')">
+            <img src="../IMAGES/jinramen.jpg" alt="Japanese Ramen">
+            <h3>Japanese Ramen</h3>
+            <p>Traditional soy-based ramen</p>
+            <p>$4.50</p>
+            <button>Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Wangs. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function addToCart(name, description, price, image) {
+            let product = { name, description, price, image };
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showNotification(`${name} has been added to your cart!`);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('cart-notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+
+kimbap.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimbap - Wangs</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kimbap</h1>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button onclick="history.back()" class="back-button">Back</button>
+
+    <section class="product-grid">
+        <div class="product" onclick="addToCart('SHIN Ramyun', 'Spicy Korean noodle classic', 3.99, '../IMAGES/ramyun.jpg')">
+            <img src="../IMAGES/ramyun.jpg" alt="SHIN Ramyun">
+            <h3>SHIN Ramyun</h3>
+            <p>Spicy Korean noodle classic</p>
+            <p>$3.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product" onclick="addToCart('Japanese Ramen', 'Traditional soy-based ramen', 4.50, '../IMAGES/jinramen.jpg')">
+            <img src="../IMAGES/jinramen.jpg" alt="Japanese Ramen">
+            <h3>Japanese Ramen</h3>
+            <p>Traditional soy-based ramen</p>
+            <p>$4.50</p>
+            <button>Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Wangs. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+kimchi.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimchi - Wangs</title>
+    <link rel="stylesheet" href="../CODES/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kimchi</h1>
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button onclick="history.back()" class="back-button">Back</button>
+
+    <section class="product-grid">
+        <div class="product" onclick="addToCart('SHIN Ramyun', 'Spicy Korean noodle classic', 3.99, '../IMAGES/ramyun.jpg')">
+            <img src="../IMAGES/ramyun.jpg" alt="SHIN Ramyun">
+            <h3>SHIN Ramyun</h3>
+            <p>Spicy Korean noodle classic</p>
+            <p>$3.99</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product" onclick="addToCart('Japanese Ramen', 'Traditional soy-based ramen', 4.50, '../IMAGES/jinramen.jpg')">
+            <img src="../IMAGES/jinramen.jpg" alt="Japanese Ramen">
+            <h3>Japanese Ramen</h3>
+            <p>Traditional soy-based ramen</p>
+            <p>$4.50</p>
+            <button>Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Wangs. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+styles.css:
+:root {
+    --main-red: #ec2400;
+    --main-yellow: #ecca00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    color: #333;
+    background-color: #fff;
+}
+
+header {
+    text-align: center;
+    background-color: var(--main-red);
+    color: #fff;
+    padding: 1em;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+.tagline {
+    font-size: 1.2em;
+    color: var(--main-yellow);
+}
+
+.main-navigation, .sub-navigation {
+    background-color: var(--main-red);
+    text-align: center;
+    padding: 0.5em 0;
+}
+
+.main-navigation ul, .sub-navigation ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.main-navigation ul li a, .sub-navigation ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    font-weight: bold;
+}
+
+.main-navigation ul li a.active,
+.main-navigation ul li a:hover,
+.sub-navigation ul li a:hover {
+    background-color: var(--main-yellow);
+    color: #333;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    padding: 2em;
+}
+
+.product {
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+button {
+    background-color: var(--main-red);
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: var(--main-yellow);
+}
+
+.back-button {
+    display: block;
+    margin: 1em auto;
+    background-color: var(--main-yellow);
+    color: #333;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+footer {
+    background-color: var(--main-red);
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--main-yellow);
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .main-navigation ul, .sub-navigation ul {
+        flex-direction: column;
+    }
+}
