@@ -1,0 +1,52 @@
+body {
+    background: url("https://giffiles.alphacoders.com/215/215948.gif") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(9, 177, 177);
+    text-shadow:1px 1px 3px rgba(0, 0, 0, 0.7)
+}   
+h1,h2, p{
+    text-align: center;
+    color: aqua;
+}
+.h2{
+    font-size: 24px;
+}  
+.profile-container{
+    max-width: 888px;
+    margin: 10px auto;
+    background-color: rgba(57, 34, 141, 0.342);
+    border-radius: 20px;
+    border: 3px solid #067d92;
+    padding: 20px;
+    overflow: hidden;           
+
+}
+.contact-btn a {   
+    background-color: rgb(226, 226, 226);
+}
+.contact-btn a:hover{
+    transform: scale(1.05);
+    background-color:rgb(9, 177, 177);
+}
+audio, video {
+    display: block;
+    margin: 20px auto;
+}
+.p{
+    color: rgb(129, 127, 255);
+}
+ .gallery{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    padding: 10px;
+    
+}
+.gallery a img{
+    margin:10px;
+    border:2px solid #ccc;
+    transition: transform 0.3s, border-color 0.3s;
+}
