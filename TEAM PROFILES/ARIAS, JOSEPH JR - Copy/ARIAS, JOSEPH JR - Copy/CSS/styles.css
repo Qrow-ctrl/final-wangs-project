@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #1374b4;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #77c2ff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    color: #000000;
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.info {
+    margin-bottom: 15px;
+}
+
+.info strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.facebook-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.facebook-link a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.facebook-link a:hover {
+    text-decoration: underline;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    color: #000000;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section ul li {
+    margin-bottom: 10px;
+}
+
+.section ul li a {
+    text-decoration: none;
+    color: hsl(0, 0%, 0%);
+}
+
+.section ul li a:hover {
+    text-decoration: underline;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gallery img {
+    width: 30%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #1374b4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0b5a90;
+}
+
+.button:focus {
+    outline: none;
+}
+
+@media (max-width: 390px) {
+    .container {
+        padding: 15px;
+    }
+
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .gallery img {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .gallery img {
+        width: 48%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .gallery img {
+        width: 48%;
+    }
+}
