@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Wangs</title>
+    <link rel="stylesheet" href="CSS/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+</head>
+<body>
+    <header>
+        <style>
+    /* Home page products are display only: no clicks, no hover effect */
+    .product {
+        pointer-events: none;
+        cursor: default;
+        padding-bottom: 15px;
+    }
+
+    /* Hide the Add to Cart buttons */
+    .product .add-to-cart {
+        display: none;
+    }
+</style>
+        <div class="header-container">
+            <div class="logo-tagline">
+                <img src="IMAGES/official_logo.png" alt="Wangs Logo" class="logo">
+                <span class="tagline">WANGS!</span>
+                <p>Spice up your life with</p>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                <li><a href="../index.html" class="active">Home</a></li>                    
+                    <li><a href="HTML/products.html">Shop</a></li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a href="HTML/team.html">Team</a>
+                            <a href="HTML/store_policy.html">Store Policy</a>
+                            <a href="HTML/contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                    <li><a href="HTML/signup.html"><i class="fas fa-user"></i></a></li>
+                    <li>
+                        <a href="HTML/cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <h4>Trade-in-offer</h4>
+        <h2>Super value deals</h2><br>
+        <h1>On all products</h1><br>
+        <p>Save more with coupons & up to 70% off!</p><br>
+        <a href="HTML/products.html" class="button">Shop Now</a>
+    </section>
+
+    <section id="product1" class="section-p1">
+        <h2><img src="IMAGES/best_seller.png" alt="Best Seller"></h2>
+
+        <div class="product-grid">
+            <div class="product" data-name="SHIN Ramyun" data-description="Iconic Korean spicy ramen." data-price="130.00" data-image="IMAGES/drive img/Shin-Ramyun.png">
+                <a href="clickableItems/shin-ramyun.html">
+                    <img src="IMAGES/drive img/Shin-Ramyun.png" alt="SHIN Ramyun">
+                </a>
+                <h3>SHIN Ramyun</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Iconic Korean spicy ramen.</p><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="JIN Ramen (Spicy)" data-description="For spice lovers craving bold heat." data-price="130.00" data-image="IMAGES/drive img/Jin-Ramen-spicy (1).png">
+                <a href="clickableItems/Jin-Ramen-spicy.html">
+                    <img src="IMAGES/drive img/Jin-Ramen-spicy (1).png" alt="JIN Ramen (Spicy)">
+                </a>
+                <h3>JIN Ramen (Spicy)</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>For spice lovers craving bold heat.</p><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Tuna Kimbap" data-description="Tasty tuna with a hint of sesame." data-price="160.00" data-image="IMAGES/drive img/Tuna-Kimbap.png">
+                <a href="clickableItems/Tuna-kimbap.html">
+                    <img src="IMAGES/drive img/Tuna-Kimbap.png" alt="Tuna Kimbap">
+                </a>
+                <h3>Tuna Kimbap</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>Tasty tuna with a hint of sesame.</p><br>
+                <p>₱160.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Tteokbokki" data-description="Chewy rice cakes in a sweet and spicy sauce." data-price="160.00" data-image="IMAGES/drive img/TteokBokki.png">
+                <a href="clickableItems/TteokBokki.html">
+                    <img src="IMAGES/drive img/TteokBokki.png" alt="Tteokbokki">
+                </a>
+                <h3>Tteokbokki</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>Chewy rice cakes in a sweet and spicy sauce.</p><br>
+                <p>₱160.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Fried Rice" data-description="Spicy and flavorful, featuring stir-fried kimchi." data-price="199.00" data-image="IMAGES/drive img/kimchi-fried-rice.png">
+                <a href="clickableItems/kimchi-fried-rice.html">
+                    <img src="IMAGES/drive img/kimchi-fried-rice.png" alt="Kimchi Fried Rice">
+                </a>
+                <h3>Kimchi Fried Rice</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Spicy and flavorful, featuring stir-fried kimchi.</p><br>
+                <p>₱199.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2><img src="IMAGES/featured_product.png" alt="Featured Product"></h2>
+
+        <div class="product-grid">
+            <div class="product" data-name="Cheese Ramen" data-description="Creamy, cheesy goodness with a ramen twist." data-price="130.00" data-image="IMAGES/drive img/Cheese-Ramen.png">
+                <a href="clickableItems/Cheese-Ramen.html">
+                    <img src="IMAGES/drive img/Cheese-Ramen.png" alt="Cheese Ramen">
+                </a>
+                <h3>Cheese Ramen</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Creamy, cheesy goodness with a ramen twist.</p><br><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Cheese Tteokbokki" data-description="A creamy, cheesy upgrade to the classic dish." data-price="190.00" data-image="IMAGES/drive img/Cheese-Tteokbokki.png">
+                <a href="clickableItems/Cheese-TteokBokki.html">
+                    <img src="IMAGES/drive img/Cheese-Tteokbokki.png" alt="Cheese Tteokbokki">
+                </a>
+                <h3>Cheese Tteokbokki</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>A creamy, cheesy upgrade to the classic dish.</p><br>
+                <p>₱190.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Fried Rice" data-description="Spicy and flavorful, featuring stir-fried kimchi." data-price="199.00" data-image="IMAGES/drive img/kimchi-fried-rice.png">
+                <a href="clickableItems/kimchi-fried-rice.html">
+                    <img src="IMAGES/drive img/kimchi-fried-rice.png" alt="Kimchi Fried Rice">
+                </a>
+                <h3>Kimchi Fried Rice</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Spicy and flavorful, featuring stir-fried kimchi.</p><br><br>
+                <p>₱199.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Kimbap" data-description="Tangy and savory kimchi filling." data-price="150.00" data-image="IMAGES/drive img/kimchi-kimbap.png">
+                <a href="clickableItems/kimchi-kimbap.html">
+                    <img src="IMAGES/drive img/kimchi-kimbap.png" alt="Kimchi Kimbap">
+                </a>
+                <h3>Kimchi Kimbap</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Tangy and savory kimchi filling.</p><br>
+                <p>₱150.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2><img src="IMAGES/most_popular.png" alt="Most Popular"></h2>
+
+        <div class="product-grid">
+            <div class="product" data-name="Tteokbokki" data-description="Chewy rice cakes in a sweet and spicy sauce." data-price="160.00" data-image="IMAGES/drive img/TteokBokki.png">
+                <a href="clickableItems/TteokBokki.html">
+                    <img src="IMAGES/drive img/TteokBokki.png" alt="Tteokbokki">
+                </a>
+                <h3>Tteokbokki</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>Chewy rice cakes in a sweet and spicy sauce.</p><br>
+                <p>₱160.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Ramen" data-description="A tangy, spicy bowl infused with kimchi flavors." data-price="130.00" data-image="IMAGES/drive img/Kimchi-Ramen.png">
+                <a href="clickableItems/Kimchi-Ramen.html">
+                    <img src="IMAGES/drive img/Kimchi-Ramen.png" alt="Kimchi Ramen">
+                </a>
+                <h3>Kimchi Ramen</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>A tangy, spicy bowl infused with kimchi flavors.</p><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="JIN Ramen (Mild)" data-description="Balanced flavors with a gentle kick." data-price="130.00" data-image="IMAGES/drive img/Jin-Ramen-Mild.png">
+                <a href="clickableItems/Jin-Ramen-Mild.html">
+                    <img src="IMAGES/drive img/Jin-Ramen-Mild.png" alt="JIN Ramen (Mild)">
+                </a>
+                <h3>JIN Ramen (Mild)</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>Balanced flavors with a gentle kick.</p><br><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Regular Kimbap" data-description="Classic and simple." data-price="140.00" data-image="IMAGES/drive img/Regular-Kimbap.png">
+                <a href="clickableItems/Regular-Kimbap.html">
+                    <img src="IMAGES/drive img/Regular-Kimbap.png" alt="Regular Kimbap">
+                </a>
+                <h3>Regular <br> Kimbap</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>Classic and simple.</p><br>
+                <p>₱140.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Tuna Kimbap" data-description="Tasty tuna with a hint of sesame." data-price="160.00" data-image="IMAGES/drive img/Tuna-Kimbap.png">
+                <a href="clickableItems/Tuna-kimbap.html">
+                    <img src="IMAGES/drive img/Tuna-Kimbap.png" alt="Tuna Kimbap">
+                </a>
+                <h3>Tuna Kimbap</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>Tasty tuna with a hint of sesame.</p><br>
+                <p>₱160.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2><img src="IMAGES/recommended.png" alt="Recommended"></h2>
+
+        <div class="product-grid">
+            <div class="product" data-name="SHIN Ramyun" data-description="Iconic Korean spicy ramen." data-price="130.00" data-image="IMAGES/drive img/Shin-Ramyun.png">
+                <a href="clickableItems/shin-ramyun.html">
+                    <img src="IMAGES/drive img/Shin-Ramyun.png" alt="SHIN Ramyun">
+                </a>
+                <h3>SHIN Ramyun</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Iconic Korean spicy ramen.</p><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Egg Kimbap" data-description="Packed with fluffy egg." data-price="145.00" data-image="IMAGES/drive img/Egg kimbap.png">
+                <a href="clickableItems/Egg-kimbap.html">
+                    <img src="IMAGES/drive img/Egg kimbap.png" alt="Egg Kimbap">
+                </a>
+                <br>
+                <h3>Egg Kimbap</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Packed with fluffy egg.</p><br>
+                <p>₱145.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Tuna Kimbap" data-description="Tasty tuna with a hint of sesame." data-price="160.00" data-image="IMAGES/drive img/Tuna-Kimbap.png">
+                <a href="clickableItems/Tuna-kimbap.html">
+                    <img src="IMAGES/drive img/Tuna-Kimbap.png" alt="Tuna Kimbap">
+                </a>
+                <h3>Tuna Kimbap</h3>
+                <div class="star-rating">★★★★★</div>
+                <p>Tasty tuna with a hint of sesame.</p><br>
+                <p>₱160.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Cheese Tteokbokki" data-description="A creamy, cheesy upgrade to the classic dish." data-price="190.00" data-image="IMAGES/drive img/Cheese-Tteokbokki.png">
+                <a href="clickableItems/Cheese-TteokBokki.html">
+                    <img src="IMAGES/drive img/Cheese-Tteokbokki.png" alt="Cheese Tteokbokki">
+                </a>
+                <h3>Cheese Tteokbokki</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>A creamy, cheesy upgrade to the classic dish.</p><br>
+                <p>₱190.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Fried Rice" data-description="Spicy and flavorful, featuring stir-fried kimchi." data-price="199.00" data-image="IMAGES/drive img/kimchi-fried-rice.png">
+                <a href="clickableItems/kimchi-fried-rice.html">
+                    <img src="IMAGES/drive img/kimchi-fried-rice.png" alt="Kimchi Fried Rice">
+                </a>
+                <h3>Kimchi Fried Rice</h3><br>
+                <div class="star-rating">★★★★☆</div>
+                <p>Spicy and flavorful, featuring stir-fried kimchi.</p><br>
+                <p>₱199.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+
+        <h2><img src="IMAGES/trending.png" alt="Trending"></h2>
+
+        <div class="product-grid">
+            <div class="product" data-name="Kimchi Ramen" data-description="A tangy, spicy bowl infused with kimchi flavors." data-price="130.00" data-image="IMAGES/drive img/Kimchi-Ramen.png">
+                <a href="clickableItems/Kimchi-Ramen.html">
+                    <img src="IMAGES/drive img/Kimchi-Ramen.png" alt="Kimchi Ramen">
+                </a>
+                <h3>Kimchi Ramen</h3>
+                <div class="star-rating">★★★☆☆</div>
+                <p>A tangy, spicy bowl infused with kimchi flavors.</p><br>
+                <p>₱130.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Fried Rice" data-description="Spicy and flavorful, featuring stir-fried kimchi." data-price="199.00" data-image="IMAGES/drive img/kimchi-fried-rice.png">
+                <a href="clickableItems/kimchi-fried-rice.html">
+                    <img src="IMAGES/drive img/kimchi-fried-rice.png" alt="Kimchi Fried Rice">
+                </a>
+                <h3>Kimchi Fried Rice</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Spicy and flavorful, featuring stir-fried kimchi.</p><br>
+                <p>₱199.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Kimchi Kimbap" data-description="Tangy and savory kimchi filling." data-price="150.00" data-image="IMAGES/drive img/kimchi-kimbap.png">
+                <a href="clickableItems/kimchi-kimbap.html">
+                    <img src="IMAGES/drive img/kimchi-kimbap.png" alt="Kimchi Kimbap">
+                </a>
+                <h3>Kimchi Kimbap</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>Tangy and savory kimchi filling.</p><br><br>
+                <p>₱150.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product" data-name="Cheese Tteokbokki" data-description="A creamy, cheesy upgrade to the classic dish." data-price="190.00" data-image="IMAGES/drive img/Cheese-Tteokbokki.png">
+                <a href="clickableItems/Cheese-TteokBokki.html">
+                    <img src="IMAGES/drive img/Cheese-Tteokbokki.png" alt="Cheese Tteokbokki">
+                </a>
+                <h3>Cheese Tteokbokki</h3>
+                <div class="star-rating">★★★★☆</div>
+                <p>A creamy, cheesy upgrade to the classic dish.</p><br>
+                <p>₱190.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="customer-reviews">
+        <h2>Customer Reviews</h2>
+        <!-- Review Form -->
+        <div class="review-form">
+            <h3>Share Your Thoughts:</h3>
+
+            <!-- Star Rating -->
+            <div id="rating" class="rating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+
+            <textarea id="review-text" placeholder="Write your review here..."></textarea><br>
+            <button id="submit-review" onclick="submitReview()">Submit Review</button>
+        </div>
+
+        <!-- Display Reviews -->
+        <div id="reviews-display">
+            <h3>Reviews:</h3>
+            <div id="reviews-list"></div>
+        </div>
+    </section>
+
+    <script>
+        let selectedRating = 0;
+
+        // List of random names
+        const names = ["Alice", "Bob", "Charlie", "David", "Emma", "Fiona", "George", "Hannah", "Ivy", "Jack"];
+
+        // Function to handle star click event
+        function handleStarClick(event) {
+            const stars = document.querySelectorAll('#rating .star');
+            selectedRating = parseInt(event.target.getAttribute('data-value'));
+
+            // Highlight the stars based on selection
+            stars.forEach(star => {
+                if (parseInt(star.getAttribute('data-value')) <= selectedRating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+
+        // Function to submit a review
+        function submitReview() {
+            const reviewText = document.getElementById('review-text').value;
+
+            if (reviewText.trim() === "" || selectedRating === 0) {
+                alert("Please write a review and select a rating before submitting.");
+                return;
+            }
+
+            // Get existing reviews from localStorage or initialize as an empty array
+            let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+            // Pick a random name from the list
+            const randomName = names[Math.floor(Math.random() * names.length)];
+
+            // Add the new review, rating, and name to the reviews array
+            reviews.push({
+                name: randomName,
+                text: reviewText,
+                rating: selectedRating
+            });
+
+            // Save the updated reviews back to localStorage
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+
+            // Clear the review text area and reset the rating
+            document.getElementById('review-text').value = "";
+            selectedRating = 0;
+            document.querySelectorAll('#rating .star').forEach(star => star.classList.remove('selected'));
+
+            // Display the reviews again
+            displayReviews();
+        }
+
+        // Function to display reviews
+        function displayReviews() {
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = "";  // Clear existing reviews
+
+            reviews.forEach((review, index) => {
+                const reviewElement = document.createElement('div');
+                reviewElement.classList.add('review');
+                reviewElement.innerHTML = `
+                    <div class="rating-stars">
+                        ${createStars(review.rating)}
+                    </div>
+                    <p><strong>${review.name}</strong>: ${review.text}</p>
+                    <button onclick="deleteReview(${index})">Delete</button>
+                `;
+                reviewsList.appendChild(reviewElement);
+            });
+        }
+
+        // Helper function to create stars based on rating
+        function createStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                const cls = i <= rating ? 'star selected' : 'star';
+                stars += `<span class="${cls}" data-value="${i}">&#9733;</span>`;
+            }
+            return stars;
+        }
+
+        // Function to delete a review
+        function deleteReview(index) {
+            let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.splice(index, 1);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            displayReviews();
+        }
+
+        // Run everything on page load (addEventListener so nothing gets overwritten)
+        window.addEventListener('load', function () {
+            displayReviews();
+
+            // Click listeners for the rating stars in the review form
+            document.querySelectorAll('#rating .star').forEach(star => {
+                star.addEventListener('click', handleStarClick);
+            });
+
+            // Functions from JAVA/script.js
+            if (typeof updateCartCount === 'function') updateCartCount();
+            if (typeof loadCart === 'function') loadCart();
+        });
+    </script>
+
+    <br>
+    <div class="footer">
+        <footer>
+            <p>&copy; 2024 Wangs. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="JAVA/script.js"></script> <!-- Link to external JS file -->
+</body>
+</html>
